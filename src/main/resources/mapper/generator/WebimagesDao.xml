@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.generator.dao.WebimagesDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.modules.generator.entity.WebimagesEntity" id="webimagesMap">
+        <result property="id" column="id"/>
+        <result property="iname" column="name"/>
+        <result property="category" column="category"/>
+        <result property="url" column="url"/>
+        <result property="link" column="link"/>
+    </resultMap>
+
+    <select id="getPictureListByCategoryId" resultMap="webimagesMap">
+        select * from tb_webimages where category = #{categoryId}
+    </select>
+
+    <delete id="deletePictureListByCategoryId">
+        delete from tb_webimages where category = #{categoryId}
+    </delete>
+
+    <insert id="insertOnDuplicate">
+        insert into tb_webimages (
+            link ,
+            url,
+            category)
+        values (#{link}, #{url}, #{category})
+          ON DUPLICATE KEY UPDATE
+          link = VALUES(link),
+          url = VALUES(url),
+          category = VALUES(category)
+    </insert>
+</mapper>

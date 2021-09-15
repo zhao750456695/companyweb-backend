@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.generator.dao.FilterDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.modules.generator.entity.FilterEntity" id="filterMap">
+        <result property="id" column="id"/>
+        <result property="parentId" column="parent_id"/>
+        <result property="label" column="label"/>
+    </resultMap>
+
+    <select id="queryFilterList" resultMap="filterMap">
+        select * from tb_filter
+    </select>
+
+    <select id="queryFilterListEN" resultMap="filterMap">
+        select * from tb_filter_en
+    </select>
+
+    <select id="queryFilterById" resultMap="filterMap">
+        select * from tb_filter where id = #{id}
+    </select>
+
+    <select id="queryFilterByParentId" resultMap="filterMap">
+        select * from tb_filter where parent_id = #{parentId}
+    </select>
+
+    <insert id="insertParentFilter" parameterType="io.renren.modules.generator.entity.FilterEntity" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_filter(parent_id, label) values(#{parentFilter.parentId}, #{parentFilter.label})
+    </insert>
+
+    <delete id="deleteFilterItems">
+        delete from tb_filter where parent_id = #{parentId}
+    </delete>
+
+    <delete id="deleteFilterById">
+        delete from tb_filter where id = #{id}
+    </delete>
+
+    <insert id="updateParentFilter">
+        update tb_filter SET  parent_id=#{parentId}, label=#{label} where id=#{id}
+    </insert>
+</mapper>

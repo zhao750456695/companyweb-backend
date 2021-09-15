@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.generator.dao.SampleimageDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.modules.generator.entity.SampleimageEntity" id="sampleimageMap">
+        <result property="id" column="id"/>
+        <result property="url" column="url"/>
+        <result property="category" column="category"/>
+    </resultMap>
+    <insert id="insertOnDuplicate">
+        insert into tb_sampleimage (
+            category,
+            url)
+        values (#{category}, #{url})
+          ON DUPLICATE KEY UPDATE
+          url = VALUES(url)
+    </insert>
+
+    <delete id="removeByCat">
+        delete from tb_sampleimage where category = #{cat}
+    </delete>
+
+</mapper>

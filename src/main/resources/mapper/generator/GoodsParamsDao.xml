@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.generator.dao.GoodsParamsDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.modules.generator.entity.GoodsParamsEntity" id="goodsParamsMap">
+        <result property="id" column="id"/>
+        <result property="parentId" column="parent_id"/>
+        <result property="label" column="label"/>
+        <result property="paramGroupId" column="param_group_id"/>
+        <result property="showInGoods" column="show_in_goods"/>
+    </resultMap>
+
+    <select id="queryParamsList" resultMap="goodsParamsMap">
+        select * from tb_goods_params
+    </select>
+
+    <select id="queryParamsListByPGId" resultMap="goodsParamsMap">
+        select * from tb_goods_params where param_group_id = #{paramGroupId}
+    </select>
+
+    <select id="queryParamsListByPGIdEN" resultMap="goodsParamsMap">
+        select * from tb_goods_params_en where param_group_id = #{paramGroupId}
+    </select>
+
+    <delete id="removeAll">
+        delete from tb_goods_params where 1=1
+    </delete>
+</mapper>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.generator.dao.HomeProductsDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.modules.generator.entity.HomeProductsEntity" id="homeProductsMap">
+        <result property="id" column="id"/>
+        <result property="label" column="label"/>
+        <result property="products" column="products"/>
+        <result property="category" column="category"/>
+    </resultMap>
+    <insert id="insertOnDuplicate">
+        insert into tb_home_products (
+            label,
+            products,
+            category)
+        values (#{label}, #{products}, #{category})
+          ON DUPLICATE KEY UPDATE
+          products = VALUES(products),
+          label = VALUES(label)
+    </insert>
+
+    <select id="getAll" resultMap="homeProductsMap">
+        select * from tb_home_products
+    </select>
+</mapper>

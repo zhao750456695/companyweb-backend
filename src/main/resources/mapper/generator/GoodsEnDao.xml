@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.generator.dao.GoodsEnDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.modules.generator.entity.GoodsEnEntity" id="goodsEnMap">
+        <result property="goodsId" column="goods_id"/>
+        <result property="goodsName" column="goods_name"/>
+        <result property="goodsCode" column="goods_code"/>
+        <result property="goodscategoryId" column="goodsCategory_id"/>
+        <result property="goodsTitle" column="goods_title"/>
+        <result property="updated" column="updated"/>
+        <result property="params" column="params"/>
+        <result property="brilliant" column="brilliant"/>
+        <result property="listImage" column="list_image"/>
+        <result property="showInIndex" column="show_in_index"/>
+        <result property="category" column="category"/>
+    </resultMap>
+    <insert id="insertOnDuplicate">
+        insert into tb_goods_en (
+            goods_code,
+            goods_name,
+            goodsCategory_id,
+            goods_title,
+            updated,
+            params,
+            brilliant,
+            category,
+            list_image,
+            show_in_index)
+        values (#{goodsCode}, #{goodsName}, #{goodscategoryId}, #{goodsTitle}, #{updated}, #{params}, #{brilliant}, #{category}, #{listImage}, #{showInIndex})
+          ON DUPLICATE KEY UPDATE
+          goods_name = VALUES(goods_name),
+          goodsCategory_id = VALUES(goodsCategory_id),
+          goods_title = VALUES(goods_title),
+          updated = VALUES(updated),
+          params = VALUES(params),
+          brilliant = VALUES(brilliant),
+          list_image = VALUES(list_image),
+          show_in_index = VALUES(show_in_index),
+          category = VALUES(category)
+    </insert>
+
+    <select id="selectGoodsByCode" resultMap="goodsEnMap">
+        select * from tb_goods where goods_code_en = #{goodsCode}
+    </select>
+
+</mapper>

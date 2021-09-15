@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.generator.dao.TimelineDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.modules.generator.entity.TimelineEntity" id="timelineMap">
+        <result property="tyear" column="tyear"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="id" column="id"/>
+        <result property="torder" column="torder"/>
+    </resultMap>
+
+    <select id="selectByOrder" resultMap="timelineMap">
+        select * from tb_timeline order by torder
+    </select>
+
+    <insert id="insertOnDuplicate">
+        insert into tb_timeline (
+            tyear ,
+            title,
+            content,
+            torder)
+        values (#{tyear}, #{title}, #{content}, #{torder})
+          ON DUPLICATE KEY UPDATE
+          tyear = VALUES(tyear),
+          title = VALUES(title),
+          content = VALUES(content)
+    </insert>
+</mapper>

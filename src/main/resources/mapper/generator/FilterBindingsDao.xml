@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.generator.dao.FilterBindingsDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.modules.generator.entity.FilterBindingsEntity" id="filterBindingsMap">
+        <result property="id" column="id"/>
+        <result property="categoryid" column="categoryId"/>
+        <result property="filterids" column="filterIds"/>
+    </resultMap>
+
+    <insert id="insertOnDuplicate">
+        insert into tb_filter_bindings (
+            categoryId,
+            filterIds )
+        values (#{categoryId}, #{filterIds})
+          ON DUPLICATE KEY UPDATE
+          filterIds = VALUES(filterIds)
+    </insert>
+
+    <insert id="insertOnDuplicateEN">
+        insert into tb_filter_bindings_en (
+            categoryId,
+            filterIds )
+        values (#{categoryId}, #{filterIds})
+          ON DUPLICATE KEY UPDATE
+          filterIds = VALUES(filterIds)
+    </insert>
+
+    <select id="queryFilterBindingList" resultMap="filterBindingsMap">
+        select * from tb_filter_bindings
+    </select>
+
+    <select id="queryFilterBindingListEN" resultMap="filterBindingsMap">
+        select * from tb_filter_bindings_en
+    </select>
+
+    <select id="queryFilterListByCateId" resultMap="filterBindingsMap">
+        select * from tb_filter_bindings where categoryId = #{cateId}
+    </select>
+</mapper>

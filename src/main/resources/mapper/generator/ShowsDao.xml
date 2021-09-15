@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.generator.dao.ShowsDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.modules.generator.entity.ShowsEntity" id="showsMap">
+        <result property="title" column="title"/>
+        <result property="updated" column="updated"/>
+        <result property="descri" column="descri"/>
+        <result property="content" column="content"/>
+        <result property="id" column="id"/>
+    </resultMap>
+    <insert id="insertShowInfo" parameterType="io.renren.modules.generator.entity.ShowsEntity" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_shows(title, updated, descri, content) values(#{show.title}, #{show.updated}, #{show.descri}, #{show.content})
+    </insert>
+    <update id="updateShowById">
+        UPDATE tb_shows SET title=#{show.title}, updated=#{show.updated}, descri=#{show.descri}, content=#{show.content}
+        WHERE id=#{show.id}
+    </update>
+
+</mapper>

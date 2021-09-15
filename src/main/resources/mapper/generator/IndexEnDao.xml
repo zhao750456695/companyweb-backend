@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.generator.dao.IndexEnDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.modules.generator.entity.IndexEnEntity" id="indexEnMap">
+        <result property="id" column="id"/>
+        <result property="h1" column="h1"/>
+        <result property="h2" column="h2"/>
+        <result property="category" column="category"/>
+        <result property="kid" column="kid"/>
+    </resultMap>
+
+    <insert id="insertOnDuplicate">
+        insert into tb_index_en (
+            h1,
+            h2,
+            category,
+            kid)
+        values (#{h1}, #{h2}, #{category}, #{kid})
+          ON DUPLICATE KEY UPDATE
+          h1 = VALUES(h1),
+          h2 = VALUES(h2),
+          category = VALUES(category)
+    </insert>
+
+    <insert id="insertOnDuplicateEN">
+        insert into tb_index_en (
+            h1,
+            h2,
+            category,
+            kid)
+        values (#{h1}, #{h2}, #{category}, #{kid})
+          ON DUPLICATE KEY UPDATE
+          h1 = VALUES(h1),
+          h2 = VALUES(h2),
+          category = VALUES(category)
+    </insert>
+
+    <select id="selectAbout" resultMap="indexEnMap">
+        select * from tb_index where category = 0
+    </select>
+
+    <select id="selectAboutEN" resultMap="indexEnMap">
+        select * from tb_index_en where category = 0
+    </select>
+
+    <select id="selectAboutItems" resultMap="indexEnMap">
+        select * from tb_index where category = 1
+    </select>
+
+    <select id="selectAboutNums" resultMap="indexEnMap">
+        select * from tb_index where category = 2
+    </select>
+
+    <select id="selectNews" resultMap="indexEnMap">
+        select * from tb_index where category = 3
+    </select>
+
+    <select id="selectProduct" resultMap="indexEnMap">
+        select * from tb_index where category = 4
+    </select>
+
+    <select id="selectTech" resultMap="indexEnMap">
+        select * from tb_index where category = 5
+    </select>
+
+    <select id="selectAboutItemsEN" resultMap="indexEnMap">
+        select * from tb_index_en where category = 1
+    </select>
+
+    <select id="selectAboutNumsEN" resultMap="indexEnMap">
+        select * from tb_index_en where category = 2
+    </select>
+
+    <select id="selectNewsEN" resultMap="indexEnMap">
+        select * from tb_index_en where category = 3
+    </select>
+
+    <select id="selectProductEN" resultMap="indexEnMap">
+        select * from tb_index_en where category = 4
+    </select>
+
+    <select id="selectTechEN" resultMap="indexEnMap">
+        select * from tb_index_en where category = 5
+    </select>
+
+</mapper>

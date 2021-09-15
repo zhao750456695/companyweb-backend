@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.generator.dao.WebimagesEnDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.modules.generator.entity.WebimagesEnEntity" id="webimagesEnMap">
+        <result property="id" column="id"/>
+        <result property="iname" column="iname"/>
+        <result property="category" column="category"/>
+        <result property="url" column="url"/>
+        <result property="iorder" column="iorder"/>
+        <result property="bigTitle" column="big_title"/>
+        <result property="smallTitle" column="small_title"/>
+        <result property="link" column="link"/>
+        <result property="updated" column="updated"/>
+    </resultMap>
+
+
+</mapper>
